@@ -1,0 +1,63 @@
+/*
+Theme Name:  Ascendum Brand Center
+Theme URI:   https://brandcenter.ascendumgroup.com
+Description: Custom theme for the Ascendum Brand Center platform.
+Version:     1.0.0
+Author:      Innovagency
+Author URI:  https://innovagency.com
+Text Domain: ascendum-brand-center
+*/
+
+/* ==========================================================================
+   Design Tokens
+   ========================================================================== */
+
+:root {
+    /* Colours */
+    --blue-ascendum:      #003846;
+    --blue-ascendum-60:   rgba(0, 56, 70, 0.6);
+    --blue-ascendum-90:   rgba(0, 56, 70, 0.9);
+    --red-ascendum:       #E31D1A;
+    --grey-ascendum:      #D6D6D6;
+    --darker-grey:        #585858;
+    --grey:               #B1B1B1;
+    --bg-lightest-grey:   #F4F4F4;
+    --bg-transparent-blue: rgba(0, 56, 70, 0.08);
+    --white:              #FFFFFF;
+
+    /* Typography — families */
+    --font-heading: 'Montserrat', sans-serif;
+    --font-body:    'IBM Plex Sans', sans-serif;
+
+    /* Typography — scale */
+    --text-h1-size:   40px;
+    --text-h2-size:   30px;
+    --text-h4-size:   18px;
+    --text-h5-size:   18px;
+    --text-body-m:    16px;
+    --text-body-s:    14px;
+
+    --line-height-heading: 1.3;
+    --line-height-body:    1.5;
+}
+
+/* ==========================================================================
+   Reset / Base
+   ========================================================================== */
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: var(--font-body);
+    font-size: var(--text-body-m);
+    font-weight: 400;
+    line-height: var(--line-height-body);
+    color: var(--darker-grey);
+    background-color: var(--white);
+}

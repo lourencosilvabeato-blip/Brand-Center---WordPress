@@ -3,7 +3,7 @@
 # ============================================================
 wp-admin/
 wp-includes/
-index.php
+/index.php
 license.txt
 readme.html
 wp-activate.php
@@ -43,6 +43,12 @@ wp-content/upgrade/
 wp-content/backup-db/
 wp-content/advanced-cache.php
 wp-content/wp-cache-config.php
+
+# ============================================================
+# WordPress stub index.php files in wp-content dirs
+# ============================================================
+wp-content/index.php
+wp-content/themes/index.php
 
 # ============================================================
 # Third-party plugins (not custom — install via composer/zip)
