@@ -1,0 +1,254 @@
+/* ==========================================================================
+   A02.1 — Invite User page
+   Figma: Desktop 5223:11629 / Mobile 6090:15057
+   ========================================================================== */
+
+.invite-page {
+    min-height: 100vh;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    padding: 64px 24px;
+    background-color: var(--white);
+}
+
+.invite-container {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+    width: 100%;
+    max-width: 644px;
+}
+
+/* --------------------------------------------------------------------------
+   Invite form section — max-width 420px
+   -------------------------------------------------------------------------- */
+
+.invite-form-section {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    max-width: 420px;
+    width: 100%;
+}
+
+.invite-title {
+    font-family: var(--font-heading);
+    font-size: var(--text-h1-size);    /* 40px */
+    font-weight: 700;
+    line-height: var(--line-height-heading);
+    color: var(--blue-ascendum);
+    margin: 0;
+}
+
+.invite-intro {
+    font-family: var(--font-body);
+    font-size: var(--text-body-m);    /* 16px */
+    font-weight: 400;
+    line-height: var(--line-height-body);
+    color: var(--darker-grey);
+    margin: 0;
+}
+
+/* Notice: success / info states */
+.invite-notice {
+    font-family: var(--font-body);
+    font-size: var(--text-body-m);
+    font-weight: 400;
+    line-height: var(--line-height-body);
+    padding: 12px 16px;
+    border-radius: 4px;
+}
+
+.invite-notice--success {
+    color: var(--blue-ascendum);
+    background-color: var(--bg-lightest-grey);
+}
+
+/* Form */
+.invite-form {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.invite-field-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.invite-label {
+    font-family: var(--font-body);
+    font-size: var(--text-body-m);    /* 16px */
+    font-weight: 600;
+    line-height: var(--line-height-body);
+    color: var(--blue-ascendum);
+}
+
+.invite-error-message {
+    font-family: var(--font-body);
+    font-size: var(--text-body-s);    /* 14px */
+    font-weight: 400;
+    line-height: var(--line-height-body);
+    color: var(--red-ascendum);
+}
+
+.invite-input {
+    display: block;
+    width: 100%;
+    height: 48px;
+    padding: 0 24px;
+    font-family: var(--font-body);
+    font-size: var(--text-body-m);    /* 16px */
+    font-weight: 400;
+    line-height: var(--line-height-body);
+    color: var(--blue-ascendum);
+    background-color: var(--white);
+    border: 1px solid var(--blue-ascendum);
+    border-radius: 100px;
+    outline: none;
+    appearance: none;
+    -webkit-appearance: none;
+    box-sizing: border-box;
+}
+
+.invite-input::placeholder {
+    color: var(--blue-ascendum-60);
+    opacity: 1;
+}
+
+.invite-input:focus {
+    border-width: 2px;
+}
+
+.invite-input.is-error {
+    border-color: var(--red-ascendum);
+}
+
+.invite-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 48px;
+    padding: 12px 24px;
+    font-family: var(--font-body);
+    font-size: var(--text-body-m);    /* 16px */
+    font-weight: 600;
+    line-height: var(--line-height-body);
+    color: var(--blue-ascendum);
+    background-color: var(--white);
+    border: 1px solid var(--blue-ascendum);
+    border-radius: 100px;
+    cursor: pointer;
+    box-sizing: border-box;
+    transition: background-color 0.15s ease, color 0.15s ease;
+}
+
+.invite-btn:hover,
+.invite-btn:focus-visible {
+    background-color: var(--blue-ascendum);
+    color: var(--white);
+}
+
+/* --------------------------------------------------------------------------
+   Pending invitations — card (644px, bg-lightest-grey, border-radius 16px)
+   -------------------------------------------------------------------------- */
+
+.invite-pending {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.invite-pending-title {
+    font-family: var(--font-heading);
+    font-size: 20px;
+    font-weight: 400;
+    line-height: var(--line-height-heading);
+    color: var(--blue-ascendum);
+    margin: 0;
+}
+
+.invite-pending-list {
+    list-style: none;
+    background-color: var(--bg-lightest-grey);
+    border-radius: 16px;
+    padding: 0;
+    overflow: hidden;
+}
+
+.invite-pending-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 16px 24px;
+}
+
+.invite-pending-item + .invite-pending-item {
+    border-top: 1px solid var(--grey-ascendum);
+}
+
+.invite-pending-email {
+    flex: 1 1 0;
+    font-family: var(--font-body);
+    font-size: var(--text-body-m);    /* 16px */
+    font-weight: 400;
+    line-height: var(--line-height-body);
+    color: var(--blue-ascendum);
+    min-width: 0;
+    word-break: break-all;
+}
+
+.invite-cancel-form {
+    flex-shrink: 0;
+}
+
+.invite-cancel-btn {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-family: var(--font-body);
+    font-size: var(--text-body-s);    /* 14px */
+    font-weight: 600;
+    line-height: var(--line-height-body);
+    color: var(--red-ascendum);
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    white-space: nowrap;
+}
+
+.invite-cancel-btn:hover {
+    opacity: 0.8;
+}
+
+/* ==========================================================================
+   Mobile (≤ 768px)
+   Figma: 6090:15057
+   ========================================================================== */
+
+@media ( max-width: 768px ) {
+
+    .invite-page {
+        padding: 32px 16px;
+    }
+
+    .invite-title {
+        font-size: 34px;    /* Mobile H1 */
+    }
+
+    .invite-form-section {
+        max-width: 100%;
+    }
+
+    /* Each pending invite row stacks vertically on mobile */
+    .invite-pending-item {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
+    }
+
+}
