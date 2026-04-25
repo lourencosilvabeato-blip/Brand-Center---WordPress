@@ -1,0 +1,425 @@
+/* ==========================================================================
+   A01 — Login page
+   Figma: Desktop 5185:9964 / Mobile 4703:5555
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   Page layout: split screen (desktop) / stacked (mobile)
+   -------------------------------------------------------------------------- */
+
+.login-page-body {
+    margin: 0;
+    padding: 0;
+    overflow: hidden; /* prevent body scroll; sidebar scrolls internally */
+}
+
+.login-page {
+    display: flex;
+    flex-direction: row;
+    min-height: 100vh;
+}
+
+/* Left: background image fills remaining width */
+.login-image {
+    flex: 1 1 0;
+    position: relative;
+    overflow: hidden;
+    min-height: 100vh;
+}
+
+.login-image img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+}
+
+/* Right: white sidebar — fixed 374px, scrollable */
+.login-sidebar {
+    flex: 0 0 374px;
+    width: 374px;
+    display: flex;
+    flex-direction: column;
+    padding: 32px 32px 16px;
+    background-color: var(--white);
+    overflow-y: auto;
+    min-height: 100vh;
+}
+
+/* --------------------------------------------------------------------------
+   Sidebar content (headline + form + SSO) — gap 24px between each child
+   -------------------------------------------------------------------------- */
+
+.login-sidebar-content {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+/* --------------------------------------------------------------------------
+   Headline: title + introduction + subtitle — gap 8px
+   -------------------------------------------------------------------------- */
+
+.login-headline {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.login-title {
+    font-family: var(--font-heading);
+    font-size: var(--text-h2-size);    /* 30px */
+    font-weight: 700;
+    line-height: var(--line-height-heading);
+    color: var(--blue-ascendum);
+    margin: 0;
+}
+
+.login-introduction,
+.login-subtitle {
+    font-family: var(--font-body);
+    font-size: var(--text-body-m);    /* 16px */
+    font-weight: 400;
+    line-height: var(--line-height-body);
+    color: var(--darker-grey);
+    margin: 0;
+}
+
+/* --------------------------------------------------------------------------
+   Login form — gap 24px between fields group, options, and submit button
+   -------------------------------------------------------------------------- */
+
+.login-form {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+/* Fields group: label + error + email + password — gap 16px */
+.login-form-fields {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.login-form-label {
+    font-family: var(--font-body);
+    font-size: var(--text-body-m);    /* 16px */
+    font-weight: 600;
+    line-height: var(--line-height-body);
+    color: var(--blue-ascendum);
+    margin: 0;
+}
+
+/* Error message */
+.login-error-message {
+    font-family: var(--font-body);
+    font-size: var(--text-body-s);    /* 14px */
+    font-weight: 400;
+    line-height: var(--line-height-body);
+    color: var(--red-ascendum);
+}
+
+/* Individual field wrapper */
+.login-field {
+    position: relative;
+}
+
+/* Input: pill style */
+.login-input {
+    display: block;
+    width: 100%;
+    height: 48px;
+    padding: 0 24px;
+    font-family: var(--font-body);
+    font-size: var(--text-body-m);    /* 16px */
+    font-weight: 400;
+    line-height: var(--line-height-body);
+    color: var(--blue-ascendum);
+    background-color: var(--white);
+    border: 1px solid var(--blue-ascendum);
+    border-radius: 100px;
+    outline: none;
+    appearance: none;
+    -webkit-appearance: none;
+    box-sizing: border-box;
+}
+
+.login-input::placeholder {
+    color: var(--blue-ascendum-60);
+    opacity: 1;
+}
+
+.login-input:focus {
+    border-width: 2px;
+}
+
+.login-input.is-error {
+    border-color: var(--red-ascendum);
+}
+
+/* Options row: remember me (left) + forgot password (right) */
+.login-options {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.login-remember-label {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+}
+
+.login-checkbox {
+    flex-shrink: 0;
+    width: 20px;
+    height: 20px;
+    border: 1px solid var(--blue-ascendum);
+    border-radius: 2px;
+    background-color: var(--white);
+    appearance: none;
+    -webkit-appearance: none;
+    cursor: pointer;
+}
+
+.login-checkbox:checked {
+    background-color: var(--blue-ascendum);
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3E%3Cpath fill='%23ffffff' d='M8.5 14.2L4 9.7l1.4-1.4 3.1 3.1 7.1-7.1 1.4 1.4-8.5 8.5z'/%3E%3C/svg%3E");
+    background-size: 16px 16px;
+    background-repeat: no-repeat;
+    background-position: center;
+    border-color: var(--blue-ascendum);
+}
+
+.login-remember-text {
+    font-family: var(--font-body);
+    font-size: var(--text-body-s);    /* 14px */
+    font-weight: 400;
+    line-height: 1;
+    color: var(--darker-grey);
+}
+
+.login-forgot-link {
+    font-family: var(--font-body);
+    font-size: var(--text-body-s);    /* 14px */
+    font-weight: 600;
+    line-height: var(--line-height-body);
+    color: var(--blue-ascendum);
+    text-decoration: underline;
+    text-underline-offset: 2px;
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+}
+
+/* --------------------------------------------------------------------------
+   Buttons: Enter + SSO — shared pill style
+   -------------------------------------------------------------------------- */
+
+.login-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    width: 100%;
+    height: 48px;
+    padding: 12px 24px;
+    font-family: var(--font-body);
+    font-size: var(--text-body-m);    /* 16px */
+    font-weight: 600;
+    line-height: var(--line-height-body);
+    color: var(--blue-ascendum);
+    background-color: var(--white);
+    border: 1px solid var(--blue-ascendum);
+    border-radius: 100px;
+    cursor: pointer;
+    text-align: center;
+    text-decoration: none;
+    box-sizing: border-box;
+    transition: background-color 0.15s ease, color 0.15s ease;
+}
+
+.login-btn:hover,
+.login-btn:focus-visible {
+    background-color: var(--blue-ascendum);
+    color: var(--white);
+}
+
+.login-btn:hover svg path,
+.login-btn:focus-visible svg path {
+    /* Keep Microsoft logo colours on hover — do not invert */
+}
+
+.login-btn:disabled,
+.login-btn[aria-disabled="true"] {
+    opacity: 0.4;
+    cursor: not-allowed;
+}
+
+/* --------------------------------------------------------------------------
+   SSO divider: horizontal rules flanking text
+   -------------------------------------------------------------------------- */
+
+.login-sso-divider {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.login-sso-divider::before,
+.login-sso-divider::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background-color: var(--grey-ascendum);
+}
+
+.login-sso-divider-text {
+    font-family: var(--font-body);
+    font-size: var(--text-body-m);    /* 16px */
+    font-weight: 400;
+    line-height: var(--line-height-body);
+    color: var(--darker-grey);
+    white-space: nowrap;
+}
+
+/* --------------------------------------------------------------------------
+   Footer: separator pushes footer to bottom of sidebar
+   -------------------------------------------------------------------------- */
+
+.login-footer-separator {
+    flex-grow: 1;    /* expands to fill remaining sidebar height */
+    min-height: 24px;
+    border-bottom: 1px solid var(--grey-ascendum);
+    margin-bottom: 0;
+}
+
+.login-footer {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    padding-top: 12px;
+}
+
+/* Social row: institutional link (left, flex-grow) + icon group (right) */
+.login-social-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.login-institutional-link {
+    flex: 1 1 0;
+    font-family: var(--font-heading);
+    font-size: var(--text-body-s);    /* 14px */
+    font-weight: 600;
+    line-height: var(--line-height-body);
+    color: var(--blue-ascendum);
+    text-decoration: none;
+    min-width: 0;
+}
+
+.login-institutional-link:hover {
+    text-decoration: underline;
+}
+
+.login-social-icons {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-shrink: 0;
+}
+
+.login-social-icon-link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 24px;
+    height: 24px;
+    flex-shrink: 0;
+}
+
+.login-social-icon-link img {
+    display: block;
+    width: 24px;
+    height: 24px;
+    object-fit: contain;
+}
+
+/* Legal links row */
+.login-legal-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px 24px;
+}
+
+.login-legal-link {
+    font-family: var(--font-body);
+    font-size: var(--text-body-s);    /* 14px */
+    font-weight: 600;
+    line-height: var(--line-height-body);
+    color: var(--blue-ascendum);
+    text-decoration: underline;
+    text-underline-offset: 2px;
+}
+
+.login-legal-link:hover {
+    color: var(--blue-ascendum);
+    opacity: 0.8;
+}
+
+/* Copyright */
+.login-copyright {
+    font-family: var(--font-body);
+    font-size: var(--text-body-s);    /* 14px */
+    font-weight: 400;
+    line-height: 1;
+    color: var(--darker-grey);
+    margin: 0;
+}
+
+/* ==========================================================================
+   Mobile: stacked layout (≤ 768px)
+   Figma: 4703:5555
+   ========================================================================== */
+
+@media ( max-width: 768px ) {
+
+    .login-page-body {
+        overflow: auto;
+    }
+
+    .login-page {
+        flex-direction: column;
+        min-height: 100vh;
+    }
+
+    /* Image block: fixed height at top */
+    .login-image {
+        flex: 0 0 458px;
+        min-height: 458px;
+        width: 100%;
+    }
+
+    /* Sidebar: full width, natural height */
+    .login-sidebar {
+        flex: none;
+        width: 100%;
+        min-height: auto;
+        padding: 24px;
+        overflow-y: visible;
+    }
+
+    /* Footer separator becomes a simple top-margin on mobile */
+    .login-footer-separator {
+        flex-grow: 0;
+        min-height: 0;
+        margin-top: 24px;
+    }
+
+}
