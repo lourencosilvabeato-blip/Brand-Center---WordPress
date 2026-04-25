@@ -3,7 +3,7 @@
 # ============================================================
 wp-admin/
 wp-includes/
-index.php
+/index.php
 license.txt
 readme.html
 wp-activate.php
@@ -45,6 +45,12 @@ wp-content/advanced-cache.php
 wp-content/wp-cache-config.php
 
 # ============================================================
+# WordPress stub index.php files in wp-content dirs
+# ============================================================
+wp-content/index.php
+wp-content/themes/index.php
+
+# ============================================================
 # Third-party plugins (not custom — install via composer/zip)
 # ============================================================
 wp-content/plugins/akismet/
@@ -77,7 +83,7 @@ desktop.ini
 # ============================================================
 # Claude Code
 # ============================================================
-.claude/settings.local.json
+.claude/
 
 # ============================================================
 # Studio runtime metadata
