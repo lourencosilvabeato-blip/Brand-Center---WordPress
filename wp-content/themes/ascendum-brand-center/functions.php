@@ -576,7 +576,7 @@ function abc_enqueue_nav_assets() {
 
 add_action( 'wp_enqueue_scripts', 'abc_enqueue_login_assets' );
 function abc_enqueue_login_assets() {
-    if ( ! is_page_template( 'page-login.php' ) ) {
+    if ( ! is_page( 'login' ) && ! is_page_template( 'page-login.php' ) ) {
         return;
     }
     wp_enqueue_style(
