@@ -14,7 +14,7 @@
  *      Tenant ID, Client ID, Client Secret
  *      Scopes: openid profile email User.Read
  *      "User.Read" is required for the Graph photo endpoint
- *  - Azure AD app registration with Redirect URI: home_url('/?wpo365_redirect')
+ *  - Azure AD app registration with the Redirect URI configured in WPO365
  *    and API permissions: openid, profile, email, User.Read (delegated)
  *
  * @package ascendum-brand-center
@@ -76,12 +76,18 @@ add_filter( 'abc_sso_login_url', 'abc_get_sso_url' );
  * @return string       OAuth URL, or empty string to keep the button disabled.
  */
 function abc_get_sso_url( $url ) {
-    if ( ! defined( 'WPO365_PLUGIN_VERSION' ) ) {
+    if ( ! class_exists( '\Wpo\Login' ) ) {
         // Plugin not installed — button stays disabled (see page-login.php).
         return '';
     }
 
-    return home_url( '/?wpo365_redirect' );
+    return add_query_arg(
+        array(
+            'action'      => 'openidredirect',
+            'redirect_to' => abc_homepage_url(),
+        ),
+        home_url( '/' )
+    );
 }
 
 // ---------------------------------------------------------------------------
