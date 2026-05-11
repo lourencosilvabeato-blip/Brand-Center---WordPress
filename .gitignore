@@ -96,3 +96,10 @@ studio.md
 # Studio runtime metadata
 # ============================================================
 available-site-translations.json
+
+# ============================================================
+# Auto-generated AI config — do not commit
+# ============================================================
+AGENTS.md
+STUDIO.md
+studio.md

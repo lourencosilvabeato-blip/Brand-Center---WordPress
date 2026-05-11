@@ -51,6 +51,7 @@ function abc_theme_setup() {
 
 add_action( 'wp_enqueue_scripts', 'abc_enqueue_assets' );
 function abc_enqueue_assets() {
+    $ver = wp_get_theme()->get( 'Version' );
 
     // Google Fonts — Montserrat + IBM Plex Sans
     wp_enqueue_style(
@@ -65,7 +66,35 @@ function abc_enqueue_assets() {
         'abc-style',
         get_stylesheet_uri(),
         array( 'abc-google-fonts' ),
-        wp_get_theme()->get( 'Version' )
+        $ver
+    );
+
+    wp_enqueue_style(
+        'abc-header',
+        get_template_directory_uri() . '/assets/css/header.css',
+        array( 'abc-style' ),
+        $ver
+    );
+
+    wp_enqueue_style(
+        'abc-sidebar',
+        get_template_directory_uri() . '/assets/css/sidebar.css',
+        array( 'abc-style' ),
+        $ver
+    );
+
+    wp_enqueue_style(
+        'abc-breadcrumb',
+        get_template_directory_uri() . '/assets/css/breadcrumb.css',
+        array( 'abc-style' ),
+        $ver
+    );
+
+    wp_enqueue_style(
+        'abc-footer',
+        get_template_directory_uri() . '/assets/css/footer.css',
+        array( 'abc-style' ),
+        $ver
     );
 }
 
@@ -231,6 +260,27 @@ function abc_homepage_url() {
         $url  = $page ? get_permalink( $page->ID ) : site_url( '/homepage/' );
     }
     return $url;
+}
+
+/**
+ * Checks whether the current request is the Brand Center homepage.
+ *
+ * Uses the page ID in addition to the template check so assets still load when
+ * the Homepage page is configured as the static front page.
+ *
+ * @return bool
+ */
+function abc_is_homepage() {
+    if ( is_page_template( 'page-homepage.php' ) || is_page( 'homepage' ) ) {
+        return true;
+    }
+
+    $page = get_page_by_path( 'homepage' );
+    if ( $page && is_page( $page->ID ) ) {
+        return true;
+    }
+
+    return false;
 }
 
 // ---------------------------------------------------------------------------
@@ -532,27 +582,6 @@ add_action( 'wp_enqueue_scripts', 'abc_enqueue_nav_assets' );
 function abc_enqueue_nav_assets() {
     $ver = wp_get_theme()->get( 'Version' );
 
-    wp_enqueue_style(
-        'abc-header',
-        get_template_directory_uri() . '/assets/css/header.css',
-        array( 'abc-style' ),
-        $ver
-    );
-
-    wp_enqueue_style(
-        'abc-sidebar',
-        get_template_directory_uri() . '/assets/css/sidebar.css',
-        array( 'abc-style' ),
-        $ver
-    );
-
-    wp_enqueue_style(
-        'abc-breadcrumb',
-        get_template_directory_uri() . '/assets/css/breadcrumb.css',
-        array( 'abc-style' ),
-        $ver
-    );
-
     wp_enqueue_script(
         'abc-header',
         get_template_directory_uri() . '/assets/js/header.js',
@@ -576,7 +605,7 @@ function abc_enqueue_nav_assets() {
 
 add_action( 'wp_enqueue_scripts', 'abc_enqueue_login_assets' );
 function abc_enqueue_login_assets() {
-    if ( ! is_page_template( 'page-login.php' ) ) {
+    if ( ! is_page( 'login' ) && ! is_page_template( 'page-login.php' ) ) {
         return;
     }
     wp_enqueue_style(
@@ -1277,7 +1306,7 @@ function abc_get_footer_page_id() {
 
 add_action( 'wp_enqueue_scripts', 'abc_enqueue_homepage_assets' );
 function abc_enqueue_homepage_assets() {
-    if ( ! is_page_template( 'page-homepage.php' ) ) {
+    if ( ! abc_is_homepage() ) {
         return;
     }
     $ver = wp_get_theme()->get( 'Version' );
@@ -1298,11 +1327,6 @@ function abc_enqueue_homepage_assets() {
     );
 }
 
-// ---------------------------------------------------------------------------
-// Footer CSS: enqueue globally (footer appears on all authenticated pages)
-// ---------------------------------------------------------------------------
-
-// ---------------------------------------------------------------------------
 // C02/E02 — Generic Content page: stylesheet + icon-library script
 // ---------------------------------------------------------------------------
 
@@ -1361,20 +1385,6 @@ function abc_enqueue_search_assets() {
         array(),
         $ver,
         true
-    );
-}
-
-// ---------------------------------------------------------------------------
-// Footer CSS: enqueue globally (footer appears on all authenticated pages)
-// ---------------------------------------------------------------------------
-
-add_action( 'wp_enqueue_scripts', 'abc_enqueue_footer_assets' );
-function abc_enqueue_footer_assets() {
-    wp_enqueue_style(
-        'abc-footer',
-        get_template_directory_uri() . '/assets/css/footer.css',
-        array( 'abc-style' ),
-        wp_get_theme()->get( 'Version' )
     );
 }
 
