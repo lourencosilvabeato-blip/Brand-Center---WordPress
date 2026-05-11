@@ -16,6 +16,7 @@ require_once get_template_directory() . '/inc/sso.php';
 require_once get_template_directory() . '/inc/email.php';
 require_once get_template_directory() . '/inc/blocks.php';
 require_once get_template_directory() . '/inc/channel.php';
+require_once get_template_directory() . '/inc/file-access.php';
 
 // ---------------------------------------------------------------------------
 // Remove admin bar from the frontend for all users
