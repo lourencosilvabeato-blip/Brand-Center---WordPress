@@ -765,25 +765,6 @@ function abc_register_content_blocks_acf_fields() {
 }
 
 // ---------------------------------------------------------------------------
-// Helper: collection block index counter
-// ---------------------------------------------------------------------------
-
-/**
- * Returns the next 0-based index for a Collection block as it is rendered
- * sequentially on the page. Using a function-scoped static variable ensures
- * the counter persists correctly across multiple include calls (file-level
- * static variables do not persist between includes in PHP).
- *
- * The counter resets automatically on each new page request.
- *
- * @return int
- */
-function abc_next_collection_index() : int {
-    static $counter = -1;
-    return ++$counter;
-}
-
-// ---------------------------------------------------------------------------
 // Helper: render collection detail
 // ---------------------------------------------------------------------------
 

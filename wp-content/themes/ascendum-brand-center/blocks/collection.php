@@ -27,10 +27,12 @@ if ( ! $title ) {
 
 $asset_count = count( $assets );
 
-// Resolve the collection index (0-based among all collection blocks on the page).
-// Uses a function with a proper static variable so the counter persists correctly
-// across multiple includes (file-level static does not persist in PHP).
-$collection_url = add_query_arg( 'collection', abc_next_collection_index(), get_permalink() );
+// Resolve the collection index (0-based among all collection blocks on the page)
+// by reading a counter stored as a page-level static variable.
+// The template iterates all blocks sequentially so this increment is reliable.
+static $abc_collection_counter = -1;
+$abc_collection_counter++;
+$collection_url = add_query_arg( 'collection', $abc_collection_counter, get_permalink() );
 
 // Determine how many thumbnail slots to show based on card model.
 $thumb_slots = 'large' === $card_model ? 4 : 2;

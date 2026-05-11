@@ -518,144 +518,136 @@
 }
 
 /* --------------------------------------------------------------------------
-   Collection Detail Gallery (3-column viewer)
+   Collection Detail Page
    -------------------------------------------------------------------------- */
 
 .collection-detail {
-    display: flex;
-    flex-direction: column;
-    gap: 32px;
+    padding-bottom: 80px; /* space above sticky bar */
 }
 
 .collection-detail-back {
     display: inline-flex;
     align-items: center;
     gap: 6px;
-    font-family: var(--font-body);
     font-size: 14px;
     font-weight: 600;
     color: var(--blue-ascendum);
     text-decoration: none;
+    margin-bottom: 32px;
 }
 .collection-detail-back:hover { opacity: 0.75; }
 
-/* 3-column layout: left=asset desc, center=image+thumbs, right=collection info */
-.collection-viewer {
-    display: flex;
-    flex-direction: row;
-    gap: 32px;
-    align-items: flex-start;
-}
+.collection-detail-header { margin-bottom: 24px; }
 
-.collection-viewer-left {
-    flex: 0 0 200px;
-    min-width: 0;
-}
-
-.collection-viewer-center {
-    flex: 1;
-    min-width: 0;
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
-}
-
-.collection-viewer-right {
-    flex: 0 0 220px;
-    min-width: 0;
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
-}
-
-/* Main image */
-.collection-viewer-main {
-    background-color: var(--bg-lightest-grey);
-    border-radius: 8px;
-    overflow: hidden;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    aspect-ratio: 4 / 3;
-}
-
-.collection-viewer-img {
-    width: 100%;
-    height: 100%;
-    object-fit: contain;
-    display: block;
-}
-
-/* Thumbnail strip */
-.collection-thumb-strip {
-    display: flex;
-    flex-direction: row;
-    gap: 8px;
-    overflow-x: auto;
-    padding-bottom: 4px;
-}
-
-.collection-thumb-btn {
-    flex-shrink: 0;
-    width: 72px;
-    height: 72px;
-    border: 2px solid var(--grey-ascendum);
-    border-radius: 6px;
-    background-color: var(--bg-lightest-grey);
-    overflow: hidden;
-    cursor: pointer;
-    padding: 0;
-    transition: border-color 0.15s ease;
-}
-
-.collection-thumb-btn:hover,
-.collection-thumb-btn.is-active {
-    border-color: var(--blue-ascendum);
-}
-
-.collection-thumb-btn img {
-    width: 100%;
-    height: 100%;
-    object-fit: contain;
-    display: block;
-}
-
-/* Asset info panels — show only the active one */
-.collection-asset-info {
-    display: none;
-    flex-direction: column;
-    gap: 16px;
-}
-
-.collection-asset-info.is-active {
-    display: flex;
-}
-
-.collection-asset-download {
-    align-self: flex-start;
-}
-
-/* Right column: collection meta */
 .collection-detail-label {
     display: block;
-    font-family: var(--font-body);
     font-size: 12px;
     font-weight: 600;
     letter-spacing: 0.08em;
     text-transform: uppercase;
     color: var(--blue-ascendum-60);
+    margin-bottom: 8px;
 }
 
 .collection-detail-title {
     font-family: var(--font-heading);
     font-size: 30px;
     font-weight: 700;
-    line-height: 1.3;
     color: var(--blue-ascendum);
     margin: 0;
 }
 
-.collection-detail-desc { /* inherits rich-text spacing */ }
+.collection-detail-desc { margin-bottom: 32px; }
+
+.collection-detail-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+.collection-detail-item {
+    display: flex;
+    gap: 24px;
+    align-items: flex-start;
+    padding-bottom: 24px;
+    border-bottom: 1px solid var(--grey-ascendum);
+}
+.collection-detail-item:last-child { border-bottom: none; }
+
+.collection-detail-thumb {
+    width: 120px;
+    flex-shrink: 0;
+    background-color: var(--bg-lightest-grey);
+    border-radius: 4px;
+    overflow: hidden;
+    aspect-ratio: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.collection-detail-thumb img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+.collection-detail-item-body {
+    flex: 1;
+    min-width: 0;
+    display: flex;
+    gap: 16px;
+    align-items: flex-start;
+}
+
+.collection-detail-item-desc { flex: 1; }
+
+.collection-detail-item-download {
+    flex-shrink: 0;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: 1px solid var(--grey-ascendum);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--blue-ascendum);
+    text-decoration: none;
+    transition: border-color 0.15s ease;
+}
+.collection-detail-item-download:hover { border-color: var(--blue-ascendum); }
+
+/* Sticky download bar */
+.collection-detail-sticky-bar {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 100;
+    background-color: var(--white);
+    border-top: 1px solid var(--grey-ascendum);
+    padding: 16px 48px;
+    display: flex;
+    justify-content: center;
+}
+
+.collection-detail-sticky-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 32px;
+    background-color: var(--blue-ascendum);
+    color: var(--white);
+    font-family: var(--font-body);
+    font-size: 16px;
+    font-weight: 600;
+    border-radius: 100px;
+    text-decoration: none;
+    transition: opacity 0.15s ease;
+}
+.collection-detail-sticky-btn:hover { opacity: 0.85; }
 
 /* --------------------------------------------------------------------------
    Block: Icon Library
@@ -749,8 +741,10 @@
     justify-content: center;
     color: var(--blue-ascendum);
     text-decoration: none;
+    opacity: 0;
     transition: opacity 0.15s ease;
 }
+.icon-library-item:hover .icon-library-item-download { opacity: 1; }
 
 .icon-library-no-results {
     font-size: 16px;
@@ -826,19 +820,13 @@
         grid-template-columns: 1fr;
     }
 
-    .collection-viewer {
+    .collection-detail-item {
         flex-direction: column;
     }
 
-    .collection-viewer-right {
-        order: -1;
-        flex: none;
+    .collection-detail-thumb {
         width: 100%;
-    }
-
-    .collection-viewer-left {
-        flex: none;
-        width: 100%;
+        aspect-ratio: 16 / 9;
     }
 
     .icon-library-grid {
