@@ -619,11 +619,11 @@
 }
 .collection-detail-item-download:hover { border-color: var(--blue-ascendum); }
 
-/* Sticky download bar — starts after the 267px left sidebar on desktop */
+/* Sticky download bar */
 .collection-detail-sticky-bar {
     position: fixed;
     bottom: 0;
-    left: 267px;
+    left: 0;
     right: 0;
     z-index: 100;
     background-color: var(--white);
@@ -794,11 +794,6 @@
    -------------------------------------------------------------------------- */
 
 @media ( max-width: 1024px ) {
-    /* Reset sticky bar to full width when sidebar is hidden */
-    .collection-detail-sticky-bar {
-        left: 0;
-    }
-
     .content-page-main {
         padding: 24px 20px 48px;
     }
