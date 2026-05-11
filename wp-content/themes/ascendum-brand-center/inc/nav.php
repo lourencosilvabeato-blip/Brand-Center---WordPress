@@ -557,6 +557,131 @@ function abc_get_search_filter_items() {
 }
 
 // ---------------------------------------------------------------------------
+// Search helpers (D01)
+// ---------------------------------------------------------------------------
+
+/**
+ * Returns all published descendant page IDs (children, grandchildren, etc.)
+ * of a given page, used to scope search results to a menu section.
+ *
+ * @param int $parent_id Parent post ID.
+ * @return int[]
+ */
+function abc_get_descendant_page_ids( int $parent_id ) : array {
+    $pages = get_pages( array(
+        'child_of'    => $parent_id,
+        'post_status' => 'publish',
+        'number'      => 0,
+    ) );
+    return array_column( $pages ? $pages : array(), 'ID' );
+}
+
+/**
+ * Returns breadcrumb parts for a search result item.
+ *
+ * Format:
+ *  'path'  => 'L1 / L2 /'   (SemiBold ancestors, empty string if page is at root level)
+ *  'title' => ' Page Title'  (Regular, with leading space)
+ *
+ * Returns empty array when the page is not in the primary nav menu.
+ *
+ * @param int $post_id Post ID.
+ * @return array{'path': string, 'title': string}|array{}
+ */
+function abc_get_search_result_breadcrumb_parts( int $post_id ) : array {
+    $flat = abc_get_primary_menu_items();
+    if ( empty( $flat ) ) {
+        return array();
+    }
+
+    $by_object = array();
+    foreach ( $flat as $item ) {
+        $oid = (int) $item->object_id;
+        if ( $oid > 0 && ! isset( $by_object[ $oid ] ) ) {
+            $by_object[ $oid ] = $item;
+        }
+    }
+
+    if ( ! isset( $by_object[ $post_id ] ) ) {
+        return array();
+    }
+
+    $ancestors  = array_reverse( get_post_ancestors( $post_id ) );
+    $page_chain = array_merge( $ancestors, array( $post_id ) );
+
+    $ancestor_labels = array();
+    $title_label     = '';
+
+    foreach ( $page_chain as $pid ) {
+        if ( ! isset( $by_object[ $pid ] ) ) {
+            continue;
+        }
+        if ( (int) $pid === (int) $post_id ) {
+            $title_label = $by_object[ $pid ]->title;
+        } else {
+            $ancestor_labels[] = $by_object[ $pid ]->title;
+        }
+    }
+
+    if ( ! $title_label ) {
+        return array();
+    }
+
+    $path = ! empty( $ancestor_labels )
+        ? implode( ' / ', $ancestor_labels ) . ' /'
+        : '';
+
+    return array(
+        'path'  => $path,
+        'title' => ' ' . $title_label,
+    );
+}
+
+/**
+ * Returns a plain-text breadcrumb path for a given page ID.
+ * Format: "Home › L1 › L2 › Page Title"
+ * Returns empty string when the page is not in the primary nav menu.
+ *
+ * Used to show navigation context inside D01 search result items.
+ *
+ * @param int $post_id Post ID.
+ * @return string
+ */
+function abc_get_search_result_breadcrumb_text( int $post_id ) : string {
+    $flat = abc_get_primary_menu_items();
+    if ( empty( $flat ) ) {
+        return '';
+    }
+
+    // Build object_id → menu item map (first occurrence wins).
+    $by_object = array();
+    foreach ( $flat as $item ) {
+        $oid = (int) $item->object_id;
+        if ( $oid > 0 && ! isset( $by_object[ $oid ] ) ) {
+            $by_object[ $oid ] = $item;
+        }
+    }
+
+    // Only show breadcrumb for pages that are in the main nav menu.
+    if ( ! isset( $by_object[ $post_id ] ) ) {
+        return '';
+    }
+
+    // Build chain from root ancestors to current page.
+    $ancestors  = array_reverse( get_post_ancestors( $post_id ) );
+    $page_chain = array_merge( $ancestors, array( $post_id ) );
+
+    $parts = array( __( 'Home', 'ascendum-brand-center' ) );
+    foreach ( $page_chain as $pid ) {
+        if ( isset( $by_object[ $pid ] ) ) {
+            $parts[] = $by_object[ $pid ]->title;
+        }
+    }
+
+    return implode( ' › ', $parts );
+}
+
+// ---------------------------------------------------------------------------
 // SVG icon helper
 // ---------------------------------------------------------------------------
 
@@ -581,6 +706,8 @@ function abc_icon( $name ) {
         'close' => '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false"><path d="M6 6L18 18M18 6L6 18" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>',
 
         'close-32' => '<svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false"><path d="M8 8L24 24M24 8L8 24" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>',
+
+        'close-20' => '<svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false"><path d="M5 5L15 15M15 5L5 15" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>',
 
         'user-plus' => '<svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false"><path d="M13.333 17.5v-1.667A3.333 3.333 0 0 0 10 12.5H4.167a3.333 3.333 0 0 0-3.334 3.333V17.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><circle cx="7.083" cy="5.833" r="3.333" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M16.667 6.667v5M19.167 9.167h-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>',
 
