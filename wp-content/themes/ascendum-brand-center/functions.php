@@ -1327,6 +1327,41 @@ function abc_enqueue_generic_content_assets() {
         $ver,
         true
     );
+
+    wp_enqueue_script(
+        'abc-collection-detail',
+        get_template_directory_uri() . '/assets/js/collection-detail.js',
+        array(),
+        $ver,
+        true
+    );
+}
+
+// ---------------------------------------------------------------------------
+// D01 — Search results page: stylesheet
+// ---------------------------------------------------------------------------
+
+add_action( 'wp_enqueue_scripts', 'abc_enqueue_search_assets' );
+function abc_enqueue_search_assets() {
+    if ( ! is_search() ) {
+        return;
+    }
+    $ver = wp_get_theme()->get( 'Version' );
+
+    wp_enqueue_style(
+        'abc-search',
+        get_template_directory_uri() . '/assets/css/search.css',
+        array( 'abc-style' ),
+        $ver
+    );
+
+    wp_enqueue_script(
+        'abc-search',
+        get_template_directory_uri() . '/assets/js/search.js',
+        array(),
+        $ver,
+        true
+    );
 }
 
 // ---------------------------------------------------------------------------
