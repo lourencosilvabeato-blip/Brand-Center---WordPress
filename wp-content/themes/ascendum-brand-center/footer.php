@@ -14,9 +14,11 @@
       $fpid = (int) $footer_page->ID;  
     }
 
-$brand_name   = $fpid ? get_field( 'footer_brand_name', $fpid )        : '';
-$inst_url     = $fpid ? get_field( 'footer_institutional_url', $fpid ) : '';
-$copyright    = $fpid ? get_field( 'footer_copyright', $fpid )         : '';
+$brand_name    = $fpid ? get_field( 'footer_brand_name', $fpid )        : '';
+$inst_url      = $fpid ? get_field( 'footer_institutional_url', $fpid ) : '';
+$copyright     = $fpid ? get_field( 'footer_copyright', $fpid )         : '';
+$social_label  = $fpid ? get_field( 'footer_social_label', $fpid )      : '';
+$social_label  = $social_label ?: 'SIGA-NOS';
 $social_links = array();
 $legal_links  = array();
 
@@ -54,7 +56,7 @@ if ( $fpid && function_exists( 'get_field' ) ) {
         <?php if ( ! empty( $social_links ) ) : ?>
         <div class="site-footer-divider" aria-hidden="true"></div>
         <div class="site-footer-social">
-            <span class="site-footer-social-label"><?php esc_html_e( 'SIGA-NOS', 'ascendum-brand-center' ); ?></span>
+            <span class="site-footer-social-label"><?php echo esc_html( $social_label ); ?></span>
             <div class="site-footer-social-icons">
                 <?php foreach ( $social_links as $slink ) :
                     if ( is_array( $slink['icon'] ) ) {

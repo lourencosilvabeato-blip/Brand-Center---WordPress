@@ -405,7 +405,7 @@ a.hp-card:hover .hp-card-overlay {
         background: transparent;
         border: none;
         backdrop-filter: none;
-        -webkit-backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: none;
         gap: 8px;
         width: 100%;
     }

@@ -217,6 +217,32 @@
 }
 
 /* ==========================================================================
+   WordPress admin bar offset
+   When the admin bar is present (admin + local_admin roles), push sticky
+   sidebar and anchor bar down by 32px (desktop) / 46px (mobile).
+   ========================================================================== */
+
+.admin-bar .left-sidebar,
+.admin-bar .anchor-bar {
+    top: calc(72px + 32px);
+}
+
+.admin-bar .left-sidebar {
+    height: calc(100vh - 72px - 32px);
+}
+
+@media screen and ( max-width: 782px ) {
+    .admin-bar .left-sidebar,
+    .admin-bar .anchor-bar {
+        top: calc(72px + 46px);
+    }
+
+    .admin-bar .left-sidebar {
+        height: calc(100vh - 72px - 46px);
+    }
+}
+
+/* ==========================================================================
    Mobile (≤ 1024px) — sidebar and anchor bar hidden; content full width
    ========================================================================== */
 

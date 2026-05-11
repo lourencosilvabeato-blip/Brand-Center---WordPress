@@ -13,10 +13,11 @@ defined( 'ABSPATH' ) || exit;
 
 // ----- Error & success message maps -----------------------------------------
 $error_messages = array(
-    'required'     => __( 'This field is required.', 'ascendum-brand-center' ),
-    'invalid_email' => __( 'Please enter a valid email address.', 'ascendum-brand-center' ),
-    'user_exists'  => __( 'An account or a pending invitation already exists for this email address.', 'ascendum-brand-center' ),
-    'system'       => __( 'An unexpected error occurred. Please try again shortly.', 'ascendum-brand-center' ),
+    'required'        => __( 'This field is required.', 'ascendum-brand-center' ),
+    'invalid_email'   => __( 'Please enter a valid email address.', 'ascendum-brand-center' ),
+    'user_exists'     => __( 'An account already exists for this email address.', 'ascendum-brand-center' ),
+    'already_invited' => __( 'A pending invitation already exists for this email address.', 'ascendum-brand-center' ),
+    'system'          => __( 'An unexpected error occurred. Please try again shortly.', 'ascendum-brand-center' ),
 );
 
 $error_key = isset( $_GET['invite_error'] ) ? sanitize_key( $_GET['invite_error'] ) : '';

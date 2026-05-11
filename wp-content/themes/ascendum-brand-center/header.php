@@ -249,11 +249,22 @@ $logo_src       = get_template_directory_uri() . '/assets/images/logo.svg';
             </ul>
 
             <div class="mobile-menu-actions">
-                <?php if ( in_array( 'local_admin', (array) $current_user->roles, true )
-                        || in_array( 'administrator', (array) $current_user->roles, true ) ) : ?>
+                <?php if ( in_array( 'local_admin', (array) $current_user->roles, true ) ) : ?>
                 <a href="<?php echo esc_url( home_url( '/invite-user/' ) ); ?>" class="mobile-menu-action">
                     <?php abc_icon( 'user-plus' ); ?>
                     <?php esc_html_e( 'Invite new user', 'ascendum-brand-center' ); ?>
+                </a>
+                <?php endif; ?>
+                <?php if ( in_array( 'administrator', (array) $current_user->roles, true ) ) : ?>
+                <a href="<?php echo esc_url( admin_url() ); ?>" class="mobile-menu-action">
+                    <?php abc_icon( 'settings' ); ?>
+                    <?php esc_html_e( 'Go to management panel', 'ascendum-brand-center' ); ?>
+                </a>
+                <?php endif; ?>
+                <?php if ( in_array( 'external_user', (array) $current_user->roles, true ) ) : ?>
+                <a href="<?php echo esc_url( home_url( '/change-password/' ) ); ?>" class="mobile-menu-action">
+                    <?php abc_icon( 'lock' ); ?>
+                    <?php esc_html_e( 'Change Password', 'ascendum-brand-center' ); ?>
                 </a>
                 <?php endif; ?>
                 <a href="<?php echo esc_url( abc_get_logout_url() ); ?>" class="mobile-menu-action">
