@@ -87,12 +87,14 @@ $logo_src       = get_template_directory_uri() . '/assets/images/logo.svg';
                                     $l3_children = $l2_node['children'];
                                 ?>
                                 <div class="mega-menu-group">
+                                    <?php if ( $l2_item ) : ?>
                                     <a
                                         href="<?php echo esc_url( $l2_item->url ); ?>"
                                         class="mega-menu-l2"
                                     >
                                         <?php echo esc_html( $l2_item->title ); ?>
                                     </a>
+                                    <?php endif; ?>
                                     <?php if ( ! empty( $l3_children ) ) : ?>
                                     <ul class="mega-menu-l3-list" role="list">
                                         <?php foreach ( $l3_children as $l3_raw ) :
