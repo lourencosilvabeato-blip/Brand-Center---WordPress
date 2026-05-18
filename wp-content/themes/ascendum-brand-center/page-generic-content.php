@@ -71,9 +71,9 @@ get_header();
 
     <?php abc_render_breadcrumb(); ?>
 
-    <div class="content-page-layout<?php echo $has_anchor_bar ? ' has-anchor-bar' : ''; ?>">
+    <div class="content-page-layout<?php echo ( $has_anchor_bar && $collection_index < 0 ) ? ' has-anchor-bar' : ''; ?><?php echo $collection_index >= 0 ? ' is-collection-detail' : ''; ?>">
 
-        <?php abc_render_left_sidebar(); ?>
+        <?php if ( $collection_index < 0 ) abc_render_left_sidebar(); ?>
 
         <main id="main-content" class="content-page-main">
 
@@ -150,7 +150,7 @@ get_header();
 
         </main><!-- /.content-page-main -->
 
-        <?php if ( $has_anchor_bar ) : ?>
+        <?php if ( $has_anchor_bar && $collection_index < 0 ) : ?>
         <aside
             class="anchor-bar"
             aria-label="<?php esc_attr_e( 'Page sections', 'ascendum-brand-center' ); ?>"
