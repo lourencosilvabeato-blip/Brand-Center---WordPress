@@ -16,6 +16,7 @@ require_once get_template_directory() . '/inc/sso.php';
 require_once get_template_directory() . '/inc/email.php';
 require_once get_template_directory() . '/inc/blocks.php';
 require_once get_template_directory() . '/inc/channel.php';
+require_once get_template_directory() . '/inc/file-access.php';
 
 // ---------------------------------------------------------------------------
 // Remove admin bar from the frontend for all users
@@ -1388,6 +1389,49 @@ function abc_enqueue_search_assets() {
     );
 }
 
+add_action( 'pre_get_posts', 'abc_search_filter_query' );
+/**
+ * Scopes the main search query to a page subtree when abc_filter is set.
+ *
+ * @param WP_Query $query The WP_Query instance.
+ */
+function abc_search_filter_query( $query ) {
+    if ( ! $query->is_search() || ! $query->is_main_query() || is_admin() ) {
+        return;
+    }
+    $filter = isset( $_GET['abc_filter'] ) ? absint( $_GET['abc_filter'] ) : 0; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+    if ( ! $filter ) {
+        return;
+    }
+    $ids = abc_get_page_subtree_ids( $filter );
+    $query->set( 'post__in', ! empty( $ids ) ? $ids : array( 0 ) );
+}
+
+/**
+ * Returns the post ID of $root_id plus all its descendant page IDs.
+ *
+ * @param int $root_id Top-level page ID.
+ * @return int[]
+ */
+function abc_get_page_subtree_ids( $root_id ) {
+    $all   = array();
+    $queue = array( (int) $root_id );
+    while ( ! empty( $queue ) ) {
+        $current = array_shift( $queue );
+        $all[]   = $current;
+        $children = get_pages( array(
+            'parent'      => $current,
+            'post_status' => 'publish',
+            'number'      => 0,
+            'fields'      => 'ids',
+        ) );
+        if ( ! empty( $children ) ) {
+            $queue = array_merge( $queue, $children );
+        }
+    }
+    return $all;
+}
+
 // ---------------------------------------------------------------------------
 // NAV — Search filter checkbox on nav menu items (Appearance → Menus)
 // Adds a "Show as search filter" checkbox to each menu item in the admin.
@@ -1636,6 +1680,15 @@ function abc_register_footer_acf_fields() {
         'name'         => 'footer_institutional_url',
         'type'         => 'url',
         'instructions' => 'Optional. Brand name becomes a link when set.',
+    );
+
+    $fields[] = array(
+        'key'          => 'field_footer_social_label',
+        'label'        => 'Social Section Label',
+        'name'         => 'footer_social_label',
+        'type'         => 'text',
+        'placeholder'  => 'Follow us',
+        'instructions' => 'Label displayed above the social media icons. Defaults to "Follow us" if left blank.',
     );
 
     // Social icon slots 1–4
