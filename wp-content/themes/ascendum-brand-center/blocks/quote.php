@@ -20,12 +20,14 @@ if ( ! $text ) {
 }
 ?>
 <div class="block-quote">
-    <blockquote class="block-quote-inner">
-        <p class="block-quote-text"><?php echo esc_html( $text ); ?></p>
-        <?php if ( $author ) : ?>
-        <footer class="block-quote-author">
-            <cite><?php echo esc_html( $author ); ?></cite>
-        </footer>
-        <?php endif; ?>
-    </blockquote>
+    <div class="block-quote-body">
+        <span class="block-quote-mark block-quote-mark--open" aria-hidden="true">&#x201C;</span>
+        <blockquote class="block-quote-inner">
+            <p class="block-quote-text"><?php echo esc_html( $text ); ?></p>
+        </blockquote>
+    </div>
+    <?php if ( $author ) : ?>
+    <p class="block-quote-author"><cite><?php echo esc_html( $author ); ?></cite></p>
+    <?php endif; ?>
+    <span class="block-quote-mark" aria-hidden="true">&#x201D;</span>
 </div>
