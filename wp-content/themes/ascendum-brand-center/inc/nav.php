@@ -90,31 +90,52 @@ function abc_get_menu_tree() {
 // ---------------------------------------------------------------------------
 
 /**
- * Distributes L2 groups into columns obeying the 8-line rule.
+ * Distributes L2 groups into columns, filling each column to exactly 9 lines
+ * before continuing in the next column.
  *
- * Lines per group = 1 (L2 heading) + count(L3 links).
- * Groups are never split. If adding a group would exceed 8 lines, a new column
- * starts. A group that alone exceeds 8 lines gets its own column.
+ * Lines are counted individually: 1 for the L2 heading + 1 per L3 child.
+ * An L2 group may be split across columns. When a split occurs, the continuation
+ * segment in the new column has 'item' => null (no heading rendered for it).
  *
  * @param  array $l2_groups  L2 nodes from abc_get_menu_tree() children.
- * @return array[]           Array of columns, each an array of L2 nodes.
+ * @return array[]           Array of columns; each column is an array of segments
+ *                           with keys 'item' (WP_Post|null) and 'children' (WP_Post[]).
  */
 function abc_distribute_menu_columns( $l2_groups ) {
-    $columns       = array();
-    $current_col   = array();
-    $current_lines = 0;
+    $columns     = array();
+    $current_col = array();
+    $col_lines   = 0;
 
     foreach ( $l2_groups as $group ) {
-        $group_lines = 1 + ( is_array( $group['children'] ) ? count( $group['children'] ) : 0 );
+        $l2_item  = $group['item'];
+        $l3_items = is_array( $group['children'] ) ? array_values( $group['children'] ) : array();
 
-        if ( $current_lines > 0 && ( $current_lines + $group_lines ) > 8 ) {
-            $columns[]     = $current_col;
-            $current_col   = array();
-            $current_lines = 0;
+        // Seal the current column if already full before placing the L2 heading.
+        if ( $col_lines >= 9 ) {
+            $columns[]   = $current_col;
+            $current_col = array();
+            $col_lines   = 0;
         }
 
-        $current_col[]  = $group;
-        $current_lines += $group_lines;
+        $segment = array( 'item' => $l2_item, 'children' => array() );
+        $col_lines++; // L2 heading occupies one line.
+
+        foreach ( $l3_items as $l3_raw ) {
+            if ( $col_lines >= 9 ) {
+                // Column is full — seal it and carry the open segment forward.
+                $current_col[] = $segment;
+                $columns[]     = $current_col;
+                $current_col   = array();
+                $col_lines     = 0;
+                $segment       = array( 'item' => null, 'children' => array() );
+            }
+
+            $l3                    = is_array( $l3_raw ) ? $l3_raw['item'] : $l3_raw;
+            $segment['children'][] = $l3;
+            $col_lines++;
+        }
+
+        $current_col[] = $segment;
     }
 
     if ( ! empty( $current_col ) ) {
