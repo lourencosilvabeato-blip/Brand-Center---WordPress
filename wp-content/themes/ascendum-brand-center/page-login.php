@@ -95,7 +95,7 @@ $sso_url = apply_filters( 'abc_sso_login_url', '' );
                 id="login-form"
                 class="login-form"
                 method="post"
-                action="<?php echo esc_url( admin_url( 'admin-post.php' ) ); ?>"
+                action="<?php echo esc_url( get_permalink() ); ?>"
                 novalidate
             >
                 <input type="hidden" name="action" value="abc_login">

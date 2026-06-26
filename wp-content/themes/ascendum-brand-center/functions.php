@@ -137,6 +137,38 @@ function abc_register_acf_blocks() {
 }
 
 // ---------------------------------------------------------------------------
+// ---------------------------------------------------------------------------
+// Frontend form dispatcher — runs at init priority 1, before WPO365 can
+// intercept wp-admin/admin-post.php for unauthenticated users.
+// Forms post to their own page URL; this hook catches the action and
+// delegates to the same handlers used by admin_post_nopriv_*.
+// ---------------------------------------------------------------------------
+
+add_action( 'init', 'abc_dispatch_frontend_forms', 1 );
+function abc_dispatch_frontend_forms() {
+    if ( 'POST' !== ( $_SERVER['REQUEST_METHOD'] ?? '' ) ) {
+        return;
+    }
+    $action = isset( $_POST['action'] ) ? sanitize_key( wp_unslash( $_POST['action'] ) ) : '';
+    switch ( $action ) {
+        case 'abc_login':
+            if ( ! is_user_logged_in() ) {
+                abc_handle_login();
+            }
+            break;
+        case 'abc_set_password':
+            abc_handle_set_password();
+            break;
+        case 'abc_password_recovery':
+            abc_handle_password_recovery();
+            break;
+        case 'abc_reset_password':
+            abc_handle_reset_password();
+            break;
+    }
+}
+
+// ---------------------------------------------------------------------------
 // A01 — Authentication: redirect unauthenticated users to login page
 // ---------------------------------------------------------------------------
 

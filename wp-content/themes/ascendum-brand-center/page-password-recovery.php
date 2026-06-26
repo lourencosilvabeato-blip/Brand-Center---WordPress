@@ -128,7 +128,7 @@ $login_url = abc_login_url();
                 id="recovery-form"
                 class="set-password-form"
                 method="post"
-                action="<?php echo esc_url( admin_url( 'admin-post.php' ) ); ?>"
+                action="<?php echo esc_url( get_permalink() ); ?>"
                 novalidate
             >
                 <input type="hidden" name="action" value="abc_password_recovery">

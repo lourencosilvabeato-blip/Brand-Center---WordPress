@@ -116,7 +116,7 @@ $legal_links         = abc_get_legal_links();
             <form
                 class="set-password-form"
                 method="post"
-                action="<?php echo esc_url( admin_url( 'admin-post.php' ) ); ?>"
+                action="<?php echo esc_url( get_permalink() ); ?>"
                 novalidate
             >
                 <input type="hidden" name="action" value="abc_set_password">
