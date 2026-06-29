@@ -82,7 +82,7 @@ function abc_invite_email_html( $set_pw_url, $site_name ) {
         </tr>
         <tr>
           <td style="padding:24px 40px;border-top:1px solid #D6D6D6;">
-            <p style="margin:0;font-size:14px;color:#B1B1B1;">&copy; Ascendum 2025. All rights reserved.</p>
+            <p style="margin:0;font-size:14px;color:#B1B1B1;">&copy; Brand Center 2025. All rights reserved.</p>
           </td>
         </tr>
       </table>
@@ -163,7 +163,7 @@ function abc_recovery_email_html( $reset_url, $site_name ) {
         </tr>
         <tr>
           <td style="padding:24px 40px;border-top:1px solid #D6D6D6;">
-            <p style="margin:0;font-size:14px;color:#B1B1B1;">&copy; Ascendum 2025. All rights reserved.</p>
+            <p style="margin:0;font-size:14px;color:#B1B1B1;">&copy; Brand Center 2025. All rights reserved.</p>
           </td>
         </tr>
       </table>
@@ -244,7 +244,7 @@ function abc_admin_reset_email_html( $reset_url, $site_name ) {
         </tr>
         <tr>
           <td style="padding:24px 40px;border-top:1px solid #D6D6D6;">
-            <p style="margin:0;font-size:14px;color:#B1B1B1;">&copy; Ascendum 2025. All rights reserved.</p>
+            <p style="margin:0;font-size:14px;color:#B1B1B1;">&copy; Brand Center 2025. All rights reserved.</p>
           </td>
         </tr>
       </table>

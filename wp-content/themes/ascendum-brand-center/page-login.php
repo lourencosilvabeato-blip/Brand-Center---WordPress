@@ -105,7 +105,7 @@ $sso_url = apply_filters( 'abc_sso_login_url', '' );
                 <div class="login-form-fields">
 
                     <p class="login-form-label">
-                        <?php esc_html_e( 'Access Ascendum Brand Center', 'ascendum-brand-center' ); ?>
+                        <?php esc_html_e( 'Access Brand Center', 'ascendum-brand-center' ); ?>
                     </p>
 
                     <?php if ( $error_msg ) : ?>
@@ -192,7 +192,7 @@ $sso_url = apply_filters( 'abc_sso_login_url', '' );
                     <path d="M0 10.5H9.5V20H0z" fill="#00a4ef"/>
                     <path d="M10.5 10.5H20V20H10.5z" fill="#ffb900"/>
                 </svg>
-                <?php esc_html_e( 'Login with Ascendum account', 'ascendum-brand-center' ); ?>
+                <?php esc_html_e( 'Login with company account', 'ascendum-brand-center' ); ?>
             </a>
             <?php else : ?>
             <button
@@ -208,7 +208,7 @@ $sso_url = apply_filters( 'abc_sso_login_url', '' );
                     <path d="M0 10.5H9.5V20H0z" fill="#00a4ef"/>
                     <path d="M10.5 10.5H20V20H10.5z" fill="#ffb900"/>
                 </svg>
-                <?php esc_html_e( 'Login with Ascendum account', 'ascendum-brand-center' ); ?>
+                <?php esc_html_e( 'Login with company account', 'ascendum-brand-center' ); ?>
             </button>
             <?php endif; ?>
 
@@ -283,7 +283,7 @@ $sso_url = apply_filters( 'abc_sso_login_url', '' );
             <?php endif; ?>
 
             <p class="login-copyright">
-                <?php esc_html_e( '@Ascendum 2025 All rights reserved', 'ascendum-brand-center' ); ?>
+                <?php esc_html_e( '© Brand Center 2025. All rights reserved.', 'ascendum-brand-center' ); ?>
             </p>
 
         </footer>

@@ -251,7 +251,7 @@ $legal_links         = abc_get_legal_links();
             <?php endif; ?>
 
             <p class="set-password-copyright">
-                <?php esc_html_e( '@Ascendum 2025 All rights reserved', 'ascendum-brand-center' ); ?>
+                <?php esc_html_e( '© Brand Center 2025. All rights reserved.', 'ascendum-brand-center' ); ?>
             </p>
 
         </footer>

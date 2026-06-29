@@ -38,11 +38,11 @@ $logo_src       = get_template_directory_uri() . '/assets/images/logo.svg';
         <a
             href="<?php echo esc_url( abc_homepage_url() ); ?>"
             class="site-header-logo"
-            aria-label="<?php esc_attr_e( 'Ascendum Brand Center — Home', 'ascendum-brand-center' ); ?>"
+            aria-label="<?php esc_attr_e( 'Brand Center — Home', 'ascendum-brand-center' ); ?>"
         >
             <img
                 src="<?php echo esc_url( $logo_src ); ?>"
-                alt="<?php esc_attr_e( 'Ascendum Brand Center', 'ascendum-brand-center' ); ?>"
+                alt="<?php esc_attr_e( 'Brand Center', 'ascendum-brand-center' ); ?>"
                 width="140"
                 height="32"
             >
@@ -170,11 +170,11 @@ $logo_src       = get_template_directory_uri() . '/assets/images/logo.svg';
     <a
         href="<?php echo esc_url( abc_homepage_url() ); ?>"
         class="mobile-header-logo"
-        aria-label="<?php esc_attr_e( 'Ascendum Brand Center — Home', 'ascendum-brand-center' ); ?>"
+        aria-label="<?php esc_attr_e( 'Brand Center — Home', 'ascendum-brand-center' ); ?>"
     >
         <img
             src="<?php echo esc_url( $logo_src ); ?>"
-            alt="<?php esc_attr_e( 'Ascendum Brand Center', 'ascendum-brand-center' ); ?>"
+            alt="<?php esc_attr_e( 'Brand Center', 'ascendum-brand-center' ); ?>"
             height="28"
         >
     </a>

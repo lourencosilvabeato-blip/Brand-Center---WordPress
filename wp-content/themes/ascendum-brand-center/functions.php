@@ -1704,7 +1704,7 @@ function abc_register_footer_acf_fields() {
         'name'        => 'footer_brand_name',
         'type'        => 'text',
         'required'    => 1,
-        'placeholder' => 'Ascendum Group',
+        'placeholder' => 'Brand Group',
     );
     $fields[] = array(
         'key'          => 'field_footer_institutional_url',
@@ -1762,7 +1762,7 @@ function abc_register_footer_acf_fields() {
         'label'       => 'Copyright Text',
         'name'        => 'footer_copyright',
         'type'        => 'text',
-        'placeholder' => '© Ascendum 2025. All rights reserved.',
+        'placeholder' => '© Brand Center 2025. All rights reserved.',
     );
 
     acf_add_local_field_group( array(
@@ -1792,8 +1792,8 @@ function abc_block_categories( $categories, $block_editor_context ) {
     return array_merge(
         array(
             array(
-                'slug'  => 'ascendum',
-                'title' => __( 'Ascendum Brand Center', 'ascendum-brand-center' ),
+                'slug'  => 'brand-center',
+                'title' => __( 'Brand Center', 'ascendum-brand-center' ),
                 'icon'  => null,
             ),
         ),
