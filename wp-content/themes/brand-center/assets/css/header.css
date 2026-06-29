@@ -1,0 +1,597 @@
+﻿/* ==========================================================================
+   NAV — Site Header, Mega-menu, Profile Dropdown, Mobile Header & Menu
+   Figma: 4311:3521 (Desktop), 5384:21181 (Mobile),
+          4991:7996 (Mega-menu), 4599:10048 (Dropdown)
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   Site header bar — Desktop
+   -------------------------------------------------------------------------- */
+
+.site-header {
+    position: sticky;
+    top: 0;
+    z-index: 200;
+    width: 100%;
+    background-color: var(--color-primary);
+    height: 72px;
+}
+
+.site-header-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 100%;
+    padding: 0 32px;
+    gap: 40px;
+}
+
+/* --------------------------------------------------------------------------
+   Logo
+   -------------------------------------------------------------------------- */
+
+.site-header-logo {
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+}
+
+.site-header-logo img {
+    width: 140px;
+    height: 32px;
+    object-fit: contain;
+    display: block;
+}
+
+.site-header-logo-text {
+    font-family: var(--font-heading);
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--white);
+    white-space: nowrap;
+}
+
+/* --------------------------------------------------------------------------
+   L1 navigation links
+   -------------------------------------------------------------------------- */
+
+.site-nav {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+}
+
+.site-nav-list {
+    display: flex;
+    align-items: center;
+    gap: 40px;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.site-nav-item {
+    position: relative;
+}
+
+.site-nav-link {
+    font-family: var(--font-body);
+    font-size: var(--text-body-s);   /* 14px */
+    font-weight: 600;
+    line-height: var(--line-height-body);
+    color: var(--white);
+    text-decoration: none;
+    white-space: nowrap;
+    padding: 4px 0;
+    position: relative;
+    display: inline-block;
+}
+
+/* Active underline: 2px red below the link — shown only for the current active section */
+.site-nav-link.is-active::after {
+    content: '';
+    position: absolute;
+    bottom: -4px;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background-color: var(--color-accent);
+    border-radius: 1px;
+}
+
+/* --------------------------------------------------------------------------
+   Mega-menu dropdown
+   -------------------------------------------------------------------------- */
+
+.mega-menu {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: var(--white);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+    z-index: 300;
+    min-width: 300px;
+}
+
+.site-nav-item.is-open > .mega-menu {
+    display: block;
+}
+
+.mega-menu-inner {
+    display: flex;
+    justify-content: space-between;
+    gap: 0;
+    padding: 24px 32px 40px;
+}
+
+.mega-menu-column {
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+    min-width: 243px;
+    border-left: 1px solid rgba(0, 56, 70, 0.25);
+    padding-left: 24px;
+}
+
+.mega-menu-column:first-child {
+    border-left: none;
+    padding-left: 0;
+}
+
+.mega-menu-group {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+/* L2 heading: SemiBold 14px --blue-ascendum */
+.mega-menu-l2 {
+    font-family: var(--font-body);
+    font-size: var(--text-body-s);   /* 14px */
+    font-weight: 600;
+    line-height: var(--line-height-body);
+    color: var(--color-primary);
+    text-decoration: none;
+    display: block;
+}
+
+.mega-menu-l2:hover {
+    text-decoration: underline;
+}
+
+/* L3 list */
+.mega-menu-l3-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+/* L3 link: Regular 14px --blue-ascendum */
+.mega-menu-l3 {
+    font-family: var(--font-body);
+    font-size: var(--text-body-s);   /* 14px */
+    font-weight: 400;
+    line-height: var(--line-height-body);
+    color: var(--color-primary);
+    text-decoration: none;
+    display: block;
+}
+
+.mega-menu-l3:hover {
+    text-decoration: underline;
+}
+
+/* --------------------------------------------------------------------------
+   Profile area (avatar + name + caret + dropdown)
+   -------------------------------------------------------------------------- */
+
+.site-header-profile {
+    position: relative;
+    flex-shrink: 0;
+}
+
+.profile-trigger {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 4px 0;
+    color: var(--white);
+}
+
+.profile-avatar {
+    display: block;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    overflow: hidden;
+    flex-shrink: 0;
+}
+
+.profile-avatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.profile-welcome {
+    font-family: var(--font-body);
+    font-size: var(--text-body-s);   /* 14px */
+    font-weight: 600;
+    line-height: var(--line-height-body);
+    color: var(--white);
+    white-space: nowrap;
+}
+
+.profile-caret {
+    display: flex;
+    align-items: center;
+    color: var(--white);
+    transition: transform 0.15s ease;
+}
+
+.profile-trigger[aria-expanded="true"] .profile-caret {
+    transform: rotate(180deg);
+}
+
+/* Profile dropdown panel */
+.profile-dropdown {
+    position: absolute;
+    top: calc(100% + 8px);
+    right: 0;
+    width: 218px;
+    background-color: #002d38;
+    z-index: 400;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+}
+
+.profile-dropdown[hidden] {
+    display: none;
+}
+
+.profile-dropdown-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.profile-dropdown-item {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.profile-dropdown-item:last-child {
+    border-bottom: none;
+}
+
+.profile-dropdown-link {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 16px 24px;
+    font-family: var(--font-body);
+    font-size: var(--text-body-s);   /* 14px */
+    font-weight: 600;
+    line-height: var(--line-height-body);
+    color: var(--white);
+    text-decoration: none;
+    transition: background-color 0.15s ease;
+}
+
+.profile-dropdown-link:hover {
+    background-color: rgba(255, 255, 255, 0.08);
+}
+
+/* --------------------------------------------------------------------------
+   Mobile header — visible on mobile breakpoint
+   -------------------------------------------------------------------------- */
+
+.mobile-header {
+    display: none;
+    position: sticky;
+    top: 0;
+    z-index: 200;
+    background-color: var(--color-primary);
+    width: 100%;
+    padding: 48px 16px 16px;
+    align-items: center;
+    justify-content: space-between;
+    box-sizing: border-box;
+}
+
+.mobile-header-logo {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+}
+
+.mobile-header-logo img {
+    height: 28px;
+    width: auto;
+    display: block;
+}
+
+.mobile-header-logo-text {
+    font-family: var(--font-heading);
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--white);
+}
+
+.mobile-menu-trigger {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-family: var(--font-body);
+    font-size: var(--text-body-s);   /* 14px */
+    font-weight: 600;
+    line-height: var(--line-height-body);
+    color: var(--white);
+    padding: 0;
+}
+
+/* --------------------------------------------------------------------------
+   Mobile menu overlay
+   -------------------------------------------------------------------------- */
+
+.mobile-menu {
+    position: fixed;
+    inset: 0;
+    z-index: 500;
+    overflow: hidden;
+}
+
+.mobile-menu[hidden] {
+    display: none;
+}
+
+/* Shared: mobile menu header bar (inside overlay) */
+.mobile-menu-header {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 96px;
+    background-color: var(--color-primary);
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    padding: 16px;
+    box-sizing: border-box;
+}
+
+.mobile-menu-user {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.mobile-menu-avatar {
+    display: block;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    overflow: hidden;
+    flex-shrink: 0;
+}
+
+.mobile-menu-avatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.mobile-menu-welcome {
+    font-family: var(--font-body);
+    font-size: var(--text-body-m);   /* 16px */
+    font-weight: 600;
+    line-height: var(--line-height-body);
+    color: var(--white);
+}
+
+.mobile-menu-close {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-family: var(--font-body);
+    font-size: var(--text-body-s);   /* 14px */
+    font-weight: 600;
+    color: var(--white);
+    padding: 0;
+}
+
+/* Mobile menu L1 / L2 screens */
+.mobile-menu-l1,
+.mobile-menu-l2 {
+    position: absolute;
+    inset: 0;
+    background-color: var(--white);
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.2s ease;
+}
+
+.mobile-menu-l2[hidden] {
+    display: none;
+}
+
+/* Content area (below fixed header) */
+.mobile-menu-content {
+    margin-top: 96px;
+    flex: 1;
+    overflow-y: auto;
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+}
+
+/* L1 list items */
+.mobile-menu-l1-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    flex: 1;
+}
+
+.mobile-menu-l1-item {
+    border-bottom: 1px solid var(--color-ui-grey);
+}
+
+.mobile-menu-l1-link {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    padding: 16px 0;
+    font-family: var(--font-body);
+    font-size: var(--text-body-m);   /* 16px */
+    font-weight: 400;
+    line-height: var(--line-height-body);
+    color: var(--color-primary);
+    text-decoration: none;
+    background: none;
+    border: none;
+    cursor: pointer;
+    text-align: left;
+    box-sizing: border-box;
+}
+
+/* Bottom actions (Invite + Logout) */
+.mobile-menu-actions {
+    padding-top: 16px;
+    border-top: 1px solid var(--color-ui-grey);
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+}
+
+.mobile-menu-action {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 16px 0;
+    font-family: var(--font-body);
+    font-size: var(--text-body-m);   /* 16px */
+    font-weight: 600;
+    line-height: var(--line-height-body);
+    color: var(--color-primary);
+    text-decoration: none;
+    border-bottom: 1px solid var(--color-ui-grey);
+}
+
+.mobile-menu-action:last-child {
+    border-bottom: none;
+}
+
+/* Back button (L2 screen) */
+.mobile-menu-back {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-family: var(--font-body);
+    font-size: var(--text-body-s);   /* 14px */
+    font-weight: 600;
+    line-height: var(--line-height-body);
+    color: var(--color-primary);
+    padding: 0 0 16px;
+    margin-bottom: 8px;
+}
+
+/* L2 groups */
+.mobile-menu-l2-group {
+    border-top: 1px solid var(--color-ui-grey);
+    padding: 24px 0;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+.mobile-menu-l2-group:first-of-type {
+    border-top: none;
+    padding-top: 0;
+}
+
+.mobile-menu-l2-heading {
+    font-family: var(--font-body);
+    font-size: var(--text-body-m);   /* 16px */
+    font-weight: 600;
+    line-height: var(--line-height-body);
+    color: var(--color-primary);
+    margin: 0;
+}
+
+.mobile-menu-l3-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+}
+
+.mobile-menu-l3 {
+    display: block;
+    padding: 8px 0;
+    font-family: var(--font-body);
+    font-size: var(--text-body-m);   /* 16px */
+    font-weight: 400;
+    line-height: var(--line-height-body);
+    color: var(--color-primary);
+    text-decoration: none;
+}
+
+/* ==========================================================================
+   WordPress admin bar offset
+   When the admin bar is visible, push sticky headers down so they are not
+   obscured by the fixed 32px (desktop) / 46px (mobile) admin bar.
+   ========================================================================== */
+
+.admin-bar .site-header,
+.admin-bar .mobile-header {
+    top: 32px;
+}
+
+@media screen and ( max-width: 782px ) {
+    .admin-bar .site-header,
+    .admin-bar .mobile-header {
+        top: 46px;
+    }
+}
+
+/* ==========================================================================
+   Responsive breakpoints
+   ========================================================================== */
+
+@media ( max-width: 1024px ) {
+    .site-header {
+        display: none;
+    }
+    .mobile-header {
+        display: flex;
+    }
+}
+
+@media ( min-width: 1025px ) {
+    .mobile-header,
+    .mobile-menu {
+        display: none !important;
+    }
+}

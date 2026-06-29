@@ -1,0 +1,231 @@
+﻿/* ==========================================================================
+   NAV — Left Sidebar (contextual navigation)
+   Figma: 4595:7268 (Dev Ready Desktop), sidebar component 6228:18727
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   Sidebar shell
+   267px wide, sticky below the 72px header, fills remaining viewport height.
+   Internal layout: column flex — search (fixed) → nav list (scrollable) →
+   utility links (fixed at bottom).
+   -------------------------------------------------------------------------- */
+
+.left-sidebar {
+    width: 267px;
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: column;
+    background-color: var(--white);
+    padding-left: 24px;
+    padding-top: 8px;
+    box-sizing: border-box;
+    position: sticky;
+    top: 72px;                        /* sits directly below the header */
+    height: calc(100vh - 72px);
+    overflow: hidden;
+}
+
+/* --------------------------------------------------------------------------
+   Search form — underline style, bottom border only
+   Figma: 219px input + 20px icon = 243px row (full content width)
+   -------------------------------------------------------------------------- */
+
+.left-sidebar-search {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    width: 243px;                     /* 267 - 24px left padding */
+    height: 48px;
+    border-bottom: 1px solid var(--color-primary);
+    flex-shrink: 0;
+    background: transparent;
+}
+
+.left-sidebar-search-input {
+    flex: 1;
+    min-width: 0;
+    border: none;
+    outline: none;
+    background: transparent;
+    font-family: var(--font-body);
+    font-size: var(--text-body-m);    /* 16px */
+    font-weight: 400;
+    line-height: var(--line-height-body);
+    color: var(--color-primary);
+    padding: 0;
+    /* Remove browser default search-input decorations */
+    -webkit-appearance: none;
+    appearance: none;
+}
+
+.left-sidebar-search-input::placeholder {
+    color: var(--color-primary-60);
+    opacity: 1;
+}
+
+/* Remove native clear (×) button in WebKit */
+.left-sidebar-search-input::-webkit-search-cancel-button,
+.left-sidebar-search-input::-webkit-search-decoration {
+    -webkit-appearance: none;
+    appearance: none;
+}
+
+.left-sidebar-search-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 20px;
+    height: 20px;
+    flex-shrink: 0;
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    color: var(--color-primary);
+}
+
+.left-sidebar-search-btn:focus-visible {
+    outline: 2px solid var(--color-primary);
+    border-radius: 2px;
+}
+
+/* --------------------------------------------------------------------------
+   Sibling page nav — scrollable region
+   32px gap below search, fills remaining height before utility links.
+   -------------------------------------------------------------------------- */
+
+.left-sidebar-nav {
+    flex: 1;
+    overflow-y: auto;
+    min-height: 0;                    /* required for flex child overflow */
+    margin-top: 32px;
+}
+
+.left-sidebar-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Each item: min 48px tall, border-left handled on the LI so the link
+   padding is consistent in both active and inactive states. */
+.left-sidebar-item {
+    display: flex;
+    border-left: 3px solid transparent;
+}
+
+.left-sidebar-item.is-active {
+    border-left-color: var(--color-accent);
+}
+
+/* Link — 243px wide, 12px vertical / 24px left / 32px right padding */
+.left-sidebar-link {
+    display: flex;
+    align-items: center;
+    width: 243px;
+    min-height: 48px;
+    padding: 12px 32px 12px 21px;    /* 21px = 24px spec − 3px border on LI */
+    font-family: var(--font-body);
+    font-size: var(--text-body-m);    /* 16px */
+    font-weight: 400;
+    line-height: var(--line-height-body);
+    color: var(--darker-grey);
+    text-decoration: none;
+    box-sizing: border-box;
+    transition: background-color 0.1s ease, color 0.1s ease;
+}
+
+.left-sidebar-link:hover {
+    background-color: var(--bg-lightest-grey);
+    color: var(--color-primary);
+}
+
+.left-sidebar-item.is-active .left-sidebar-link {
+    background-color: var(--bg-lightest-grey);
+    font-weight: 600;
+    color: var(--color-primary);
+}
+
+/* --------------------------------------------------------------------------
+   Utility links (Navigation Tips + FAQs) — fixed at bottom, below a divider
+   -------------------------------------------------------------------------- */
+
+.left-sidebar-utility {
+    flex-shrink: 0;
+    border-top: 1px solid var(--color-ui-grey);
+}
+
+/* Utility links inherit the same link style as inactive sidebar links */
+.left-sidebar-utility .left-sidebar-link {
+    color: var(--darker-grey);
+    font-weight: 400;
+}
+
+/* ==========================================================================
+   Right anchor bar
+   Figma: 4595:7268 — node 6228:18636, width 241px, right-side of layout.
+   Rendered only when anchors are defined in BO. When absent, main content
+   expands to fill the full width.
+   ========================================================================== */
+
+.anchor-bar {
+    width: 241px;
+    flex-shrink: 0;
+    position: sticky;
+    top: 72px;
+    align-self: flex-start;
+    max-height: calc(100vh - 72px);
+    overflow-y: auto;
+    padding: 24px 24px 24px 0;
+}
+
+.anchor-bar-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Border lives on the <a> so the JS .is-active class (added to the link,
+   not the LI) drives both the border and text changes in one selector. */
+.anchor-bar-link {
+    display: block;
+    padding: 8px 24px 8px 23px;      /* 23px = 24px spec − 1px inactive border */
+    border-left: 1px solid var(--grey);
+    font-family: var(--font-body);
+    font-size: var(--text-body-m);    /* 16px per Figma */
+    font-weight: 400;
+    line-height: var(--line-height-body);
+    color: var(--darker-grey);
+    text-decoration: none;
+    transition: color 0.15s ease;
+}
+
+/* JS adds .is-active to the <a> via anchor-bar.js */
+.anchor-bar-link.is-active {
+    border-left: 3px solid var(--color-primary);
+    padding-left: 21px;               /* 24px spec − 3px active border */
+    font-weight: 600;
+    color: var(--color-primary);
+}
+
+.anchor-bar-link:hover {
+    color: var(--color-primary);
+}
+
+/* ==========================================================================
+   Mobile (≤ 1024px) — sidebar and anchor bar hidden; content full width
+   ========================================================================== */
+
+@media ( max-width: 1024px ) {
+    .left-sidebar {
+        display: none;
+    }
+
+    .anchor-bar {
+        display: none;
+    }
+}
