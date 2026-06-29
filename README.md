@@ -47,7 +47,7 @@ A four-level page hierarchy lives in WordPress menus and simultaneously drives t
 Brand assets are restricted to authenticated users. Download requests are gated — unauthenticated requests are rejected before the file stream opens.
 
 **Transactional Email**
-Four email triggers — invite, password recovery, admin-initiated reset, and contact form — all route through a single PHP email handler. No email logic is duplicated across templates.
+Four email triggers — invite, password recovery, admin-initiated reset, and contact form — all route through a single Nodemailer-style PHP email handler. No email logic is duplicated across templates.
 
 ---
 
@@ -110,7 +110,7 @@ wp-content/
 ├── plugins/
 │   └── advanced-custom-fields-pro/     — ACF Pro plugin (block & field registration)
 └── themes/
-    └── ascendum-brand-center/
+    └── brand-center/
         ├── assets/
         │   ├── css/                    — Per-component stylesheets
         │   │   ├── breadcrumb.css
@@ -179,13 +179,13 @@ wp-content/
 1. Clone this repository into your WordPress installation:
 
 ```bash
-git clone https://github.com/lourencosilvabeato-blip/Brand-Center---WordPress.git
+git clone https://github.com/lourencosilvabeato/Brand-Center-WordPress-Implementation.git
 ```
 
 2. Copy the theme to your WordPress themes directory:
 
 ```bash
-cp -r wp-content/themes/ascendum-brand-center /path/to/wordpress/wp-content/themes/
+cp -r wp-content/themes/brand-center /path/to/wordpress/wp-content/themes/
 cp -r wp-content/plugins/advanced-custom-fields-pro /path/to/wordpress/wp-content/plugins/
 ```
 
